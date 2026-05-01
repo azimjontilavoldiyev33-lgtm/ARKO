@@ -201,10 +201,18 @@ const Footer = () => {
       </div>
 
       {/* Copyright */}
-      <div className="text-center px-5 py-6 border-t border-white/5 text-gray-600 text-xs tracking-widest">
-        © {new Date().getFullYear()} {t("footer_copyright")}
-        <span className="relative left-[550px]">{t("footer_developer")}</span>
-      </div>
+  {/* Copyright */}
+<div className="
+  flex flex-col sm:flex-row
+  items-center justify-between
+  gap-2
+  px-5 py-6
+  border-t border-white/5
+  text-gray-600 text-xs tracking-widest
+">
+  <span>© {new Date().getFullYear()} {t("footer_copyright")}</span>
+  <span>{t("footer_developer")}</span>
+</div>
     </footer>
   );
 };
