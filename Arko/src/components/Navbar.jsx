@@ -2,70 +2,58 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Globe } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation } from 'react-router-dom'; // ✅ React Router ishlatildi
+import { Link, useLocation } from 'react-router-dom';
 
-// ✅ Nav items bitta joyda — DRY prinsipi
 const NAV_LINKS = [
-  { key: 'nav_home',         href: '/'            },
-  { key: 'nav_about',        href: '/About'        },
-  { key: 'nav_catalog',      href: '/Catalog'      },
-  { key: 'nav_configurator', href: '/Moodboard' },
-  { key: 'nav_contact',      href: '/Contact'      },
+  { key: 'nav_home',         href: '/'           },
+  { key: 'nav_about',        href: '/About'       },
+  { key: 'nav_catalog',      href: '/Catalog'     },
+  { key: 'nav_configurator', href: '/Moodboard'   },
+  { key: 'nav_contact',      href: '/Contact'     },
 ];
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
-  const location  = useLocation();          // ✅ active link uchun
-  const [isOpen,     setIsOpen]     = useState(false);
-  const [scrolled,   setScrolled]   = useState(false); // ✅ scroll effekti
+  const location = useLocation();
+  const [isOpen,   setIsOpen]   = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // ✅ Scroll hodisasini kuzatish
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // ✅ Route o'zgarganda mobil menyuni yopish
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location.pathname]);
+  useEffect(() => { setIsOpen(false); }, [location.pathname]);
 
-  // ✅ Menyu ochiq bo'lganda body scrollini bloklash
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
-  const toggleLanguage = () => {
+  const toggleLanguage = () =>
     i18n.changeLanguage(i18n.language === 'uz' ? 'ru' : 'uz');
-  };
 
   const isActive = (href) => location.pathname === href;
 
   return (
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0,    opacity: 1 }}
+      animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className={[
         'fixed top-0 left-0 right-0 z-[100]',
-        'border-b border-[#C5A059]/10',
-        'transition-all duration-300',
+        'border-b border-[#C5A059]/10 transition-all duration-300',
         scrolled
           ? 'bg-[#0D0D0D]/95 backdrop-blur-xl shadow-lg shadow-black/30'
           : 'bg-[#0D0D0D]/80 backdrop-blur-lg',
       ].join(' ')}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 sm:h-18 lg:h-20">
+        <div className="flex justify-between items-center h-16 lg:h-20">
 
-          {/* ───── LOGOTIP ───── */}
-          <Link
-            to="/"
-            className="flex flex-col group select-none shrink-0"
-            aria-label="Arko Mebel — bosh sahifa"
-          >
+          {/* LOGO */}
+          <Link to="/" className="flex flex-col group select-none shrink-0">
             <span className="text-[#C5A059] text-xl sm:text-2xl font-serif font-bold tracking-tighter leading-none group-hover:opacity-80 transition-opacity duration-200">
               ARKO MEBEL
             </span>
@@ -74,7 +62,7 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* ───── DESKTOP MENU (lg va undan katta) ───── */}
+          {/* DESKTOP NAV — lg+ */}
           <div className="hidden lg:flex items-center gap-8 xl:gap-10">
             {NAV_LINKS.map(({ key, href }) => (
               <Link
@@ -92,92 +80,22 @@ const Navbar = () => {
                 {t(key)}
               </Link>
             ))}
-
-            {/* TIL ALMASHTIRGICH */}
-            <LanguageButton
-              lang={i18n.language}
-              onToggle={toggleLanguage}
-              variant="full"
-            />
+            <LanguageButton lang={i18n.language} onToggle={toggleLanguage} />
           </div>
 
-          {/* ───── TABLET MENU (md dan lg gacha) ───── */}
-          <div className="hidden md:flex lg:hidden items-center gap-5">
-            {NAV_LINKS.slice(0, 3).map(({ key, href }) => (
-              <Link
-                key={key}
-                to={href}
-                className={[
-                  'text-[10px] uppercase tracking-[2px] transition-colors duration-200',
-                  isActive(href) ? 'text-[#C5A059]' : 'text-white hover:text-[#C5A059]',
-                ].join(' ')}
-              >
-                {t(key)}
-              </Link>
-            ))}
-            <LanguageButton
-              lang={i18n.language}
-              onToggle={toggleLanguage}
-              variant="full"
-            />
-            {/* Qolgan linklar uchun hamburger */}
-            <button
-              onClick={() => setIsOpen((p) => !p)}
-              aria-label={isOpen ? 'Menyuni yopish' : 'Menyuni ochish'}
-              aria-expanded={isOpen}
-              className="text-white hover:text-[#C5A059] transition-colors duration-200 p-1"
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.span
-                  key={isOpen ? 'close' : 'open'}
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0,   opacity: 1 }}
-                  exit={{    rotate:  90, opacity: 0 }}
-                  transition={{ duration: 0.15 }}
-                  className="block"
-                >
-                  {isOpen ? <X size={22} /> : <Menu size={22} />}
-                </motion.span>
-              </AnimatePresence>
-            </button>
-          </div>
-
-          {/* ───── MOBILE BUTTONS (sm gacha) ───── */}
-          <div className="flex md:hidden items-center gap-3">
-            <LanguageButton
-              lang={i18n.language}
-              onToggle={toggleLanguage}
-              variant="compact"
-            />
-            <button
-              onClick={() => setIsOpen((p) => !p)}
-              aria-label={isOpen ? 'Menyuni yopish' : 'Menyuni ochish'}
-              aria-expanded={isOpen}
-              className="text-white hover:text-[#C5A059] transition-colors duration-200 p-1"
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.span
-                  key={isOpen ? 'close' : 'open'}
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0,   opacity: 1 }}
-                  exit={{    rotate:  90, opacity: 0 }}
-                  transition={{ duration: 0.15 }}
-                  className="block"
-                >
-                  {isOpen ? <X size={24} /> : <Menu size={24} />}
-                </motion.span>
-              </AnimatePresence>
-            </button>
+          {/* MOBILE/TABLET CONTROLS — lg dan kichik */}
+          <div className="flex lg:hidden items-center gap-3">
+            <LanguageButton lang={i18n.language} onToggle={toggleLanguage} compact />
+            <HamburgerButton isOpen={isOpen} onClick={() => setIsOpen(p => !p)} />
           </div>
 
         </div>
       </div>
 
-      {/* ───── MOBILE / TABLET DROPDOWN ───── */}
+      {/* DROPDOWN */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               key="backdrop"
               initial={{ opacity: 0 }}
@@ -189,35 +107,26 @@ const Navbar = () => {
               aria-hidden="true"
             />
 
-            {/* Dropdown panel */}
             <motion.div
               key="mobile-menu"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
-              className={[
-                'lg:hidden overflow-hidden',
-                'bg-[#0D0D0D]/98 backdrop-blur-xl',
-                'border-t border-[#C5A059]/10',
-              ].join(' ')}
+              className="lg:hidden bg-[#0D0D0D]/98 backdrop-blur-xl border-t border-[#C5A059]/10"
             >
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col items-center gap-5 sm:gap-6">
-                
-                {/* Nav linklar */}
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex flex-col items-center gap-5">
                 {NAV_LINKS.map(({ key, href }, i) => (
                   <motion.div
                     key={key}
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.06, duration: 0.2 }}
-                    className="w-full text-center"
                   >
                     <Link
                       to={href}
                       className={[
-                        'inline-block py-1 text-sm sm:text-base uppercase tracking-[3px]',
-                        'transition-colors duration-200',
+                        'text-sm uppercase tracking-[3px] transition-colors duration-200',
                         isActive(href)
                           ? 'text-[#C5A059]'
                           : 'text-white hover:text-[#C5A059]',
@@ -228,10 +137,8 @@ const Navbar = () => {
                   </motion.div>
                 ))}
 
-                {/* Divider */}
                 <div className="w-16 h-px bg-[#C5A059]/30" />
 
-                {/* CTA tugma */}
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -240,18 +147,11 @@ const Navbar = () => {
                 >
                   <Link
                     to="/contact"
-                    className={[
-                      'block w-full py-3 sm:py-3.5',
-                      'text-center font-bold uppercase text-xs tracking-widest',
-                      'bg-[#C5A059] text-black',
-                      'hover:bg-[#b8934f] active:scale-[0.98]',
-                      'transition-all duration-200',
-                    ].join(' ')}
+                    className="block w-full py-3 text-center font-bold uppercase text-xs tracking-widest bg-[#C5A059] text-black hover:bg-[#b8934f] active:scale-[0.98] transition-all duration-200"
                   >
                     {t('contact_us', "Bog'lanish")}
                   </Link>
                 </motion.div>
-
               </div>
             </motion.div>
           </>
@@ -261,13 +161,12 @@ const Navbar = () => {
   );
 };
 
-/* ─────────────────────────────────────────────
-   Til almashtirgich — qayta ishlatiladigan komponent
-───────────────────────────────────────────── */
-const LanguageButton = ({ lang, onToggle, variant = 'full' }) => {
+/* ── Reusable components ── */
+
+const LanguageButton = ({ lang, onToggle, compact = false }) => {
   const nextLang = lang === 'uz' ? 'RU' : 'UZ';
 
-  if (variant === 'compact') {
+  if (compact) {
     return (
       <button
         onClick={onToggle}
@@ -283,12 +182,7 @@ const LanguageButton = ({ lang, onToggle, variant = 'full' }) => {
     <button
       onClick={onToggle}
       aria-label="Tilni almashtirish"
-      className={[
-        'flex items-center gap-2 px-3 py-1.5 rounded-sm',
-        'border border-[#C5A059]/30',
-        'hover:bg-[#C5A059] hover:border-[#C5A059]',
-        'group transition-all duration-300',
-      ].join(' ')}
+      className="flex items-center gap-2 px-3 py-1.5 border border-[#C5A059]/30 hover:bg-[#C5A059] hover:border-[#C5A059] group transition-all duration-300"
     >
       <Globe
         size={13}
@@ -300,5 +194,27 @@ const LanguageButton = ({ lang, onToggle, variant = 'full' }) => {
     </button>
   );
 };
+
+const HamburgerButton = ({ isOpen, onClick }) => (
+  <button
+    onClick={onClick}
+    aria-label={isOpen ? 'Menyuni yopish' : 'Menyuni ochish'}
+    aria-expanded={isOpen}
+    className="text-white hover:text-[#C5A059] transition-colors duration-200 p-1"
+  >
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.span
+        key={isOpen ? 'close' : 'open'}
+        initial={{ rotate: -90, opacity: 0 }}
+        animate={{ rotate: 0, opacity: 1 }}
+        exit={{ rotate: 90, opacity: 0 }}
+        transition={{ duration: 0.15 }}
+        className="block"
+      >
+        {isOpen ? <X size={24} /> : <Menu size={24} />}
+      </motion.span>
+    </AnimatePresence>
+  </button>
+);
 
 export default Navbar;

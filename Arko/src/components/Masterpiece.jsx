@@ -54,7 +54,7 @@ const Masterpiece = () => {
 
       {/* Fon rasmi */}
       <img
-        src="../public/kuxnya.jpg"
+        src="./kuxnya.jpg"
         alt="Premium oshxona dizayni"
         loading="lazy"
         className="absolute inset-0 w-full h-full object-cover opacity-70"

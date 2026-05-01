@@ -193,7 +193,7 @@ const ManufacturingSection = () => {
           <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.7, ease: "easeOut" }}
             className="flex-1 w-full">
-            <img src="../public/jarayon-photo.jpg" alt={t("manufacturing_img_alt")}
+            <img src="./jarayon-photo.jpg" alt={t("manufacturing_img_alt")}
               className="w-full rounded-2xl border border-[#D4AF37]/20 object-cover aspect-[4/3] sm:aspect-[16/9] lg:aspect-[4/3] hover:border-[#D4AF37]/50 transition-colors duration-300" />
           </motion.div>
         </div>

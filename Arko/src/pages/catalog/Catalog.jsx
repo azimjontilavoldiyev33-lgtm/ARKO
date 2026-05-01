@@ -2,18 +2,18 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const products = [
-  { id: 1,  cat: "yotoq",   nameKey: "prod_1_name",  descKey: "prod_1_desc",  categoryKey: "cat_cat_yotoq",   img: "../public/kravat-real.jpg"    },
-  { id: 2,  cat: "mehmon",  nameKey: "prod_2_name",  descKey: "prod_2_desc",  categoryKey: "cat_cat_mehmon",  img: "../public/stinavoy-shpon.jpg" },
-  { id: 3,  cat: "oshxona", nameKey: "prod_3_name",  descKey: "prod_3_desc",  categoryKey: "cat_cat_oshxona", img: "../public/kuxnya.jpg"          },
-  { id: 4,  cat: "yotoq",   nameKey: "prod_4_name",  descKey: "prod_4_desc",  categoryKey: "cat_cat_yotoq",   img: "../public/detski.jpg"          },
-  { id: 5,  cat: "mehmon",  nameKey: "prod_5_name",  descKey: "prod_5_desc",  categoryKey: "cat_cat_mehmon",  img: "../public/javon.jpg"           },
-  { id: 6,  cat: "mehmon",  nameKey: "prod_6_name",  descKey: "prod_6_desc",  categoryKey: "cat_cat_mehmon",  img: "../public/kamod-shpon.jpg"     },
-  { id: 7,  cat: "ofis",    nameKey: "prod_7_name",  descKey: "prod_7_desc",  categoryKey: "cat_cat_ofis",    img: "../public/reseption.jpg"       },
-  { id: 8,  cat: "ofis",    nameKey: "prod_8_name",  descKey: "prod_8_desc",  categoryKey: "cat_cat_ofis",    img: "../public/ofisnoy-stol.jpg"    },
-  { id: 9,  cat: "mehmon",  nameKey: "prod_9_name",  descKey: "prod_9_desc",  categoryKey: "cat_cat_mehmon",  img: "../public/pod-tv.jpg"          },
-  { id: 10, cat: "mehmon",  nameKey: "prod_10_name", descKey: "prod_10_desc", categoryKey: "cat_cat_mehmon",  img: "../public/Gardirob.jpg"        },
-  { id: 11, cat: "yotoq",   nameKey: "prod_11_name", descKey: "prod_11_desc", categoryKey: "cat_cat_yotoq",   img: "../public/trimo.jpg"           },
-  { id: 12, cat: "yotoq",   nameKey: "prod_12_name", descKey: "prod_12_desc", categoryKey: "cat_cat_yotoq",   img: "../public/kravat.jpg"          },
+  { id: 1,  cat: "yotoq",   nameKey: "prod_1_name",  descKey: "prod_1_desc",  categoryKey: "cat_cat_yotoq",   img: "./kravat-real.jpg"    },
+  { id: 2,  cat: "mehmon",  nameKey: "prod_2_name",  descKey: "prod_2_desc",  categoryKey: "cat_cat_mehmon",  img: "./stinavoy-shpon.jpg" },
+  { id: 3,  cat: "oshxona", nameKey: "prod_3_name",  descKey: "prod_3_desc",  categoryKey: "cat_cat_oshxona", img: "./kuxnya.jpg"          },
+  { id: 4,  cat: "yotoq",   nameKey: "prod_4_name",  descKey: "prod_4_desc",  categoryKey: "cat_cat_yotoq",   img: "./detski.jpg"          },
+  { id: 5,  cat: "mehmon",  nameKey: "prod_5_name",  descKey: "prod_5_desc",  categoryKey: "cat_cat_mehmon",  img: "./javon.jpg"           },
+  { id: 6,  cat: "mehmon",  nameKey: "prod_6_name",  descKey: "prod_6_desc",  categoryKey: "cat_cat_mehmon",  img: "./kamod-shpon.jpg"     },
+  { id: 7,  cat: "ofis",    nameKey: "prod_7_name",  descKey: "prod_7_desc",  categoryKey: "cat_cat_ofis",    img: "./reseption.jpg"       },
+  { id: 8,  cat: "ofis",    nameKey: "prod_8_name",  descKey: "prod_8_desc",  categoryKey: "cat_cat_ofis",    img: "./ofisnoy-stol.jpg"    },
+  { id: 9,  cat: "mehmon",  nameKey: "prod_9_name",  descKey: "prod_9_desc",  categoryKey: "cat_cat_mehmon",  img: "./pod-tv.jpg"          },
+  { id: 10, cat: "mehmon",  nameKey: "prod_10_name", descKey: "prod_10_desc", categoryKey: "cat_cat_mehmon",  img: "./Gardirob.jpg"        },
+  { id: 11, cat: "yotoq",   nameKey: "prod_11_name", descKey: "prod_11_desc", categoryKey: "cat_cat_yotoq",   img: "./trimo.jpg"           },
+  { id: 12, cat: "yotoq",   nameKey: "prod_12_name", descKey: "prod_12_desc", categoryKey: "cat_cat_yotoq",   img: "./kravat.jpg"          },
 ];
 
 const filterKeys = [

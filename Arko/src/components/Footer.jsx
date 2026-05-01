@@ -56,9 +56,9 @@ const IconMail = () => (
 
 // ─── Statik ma'lumotlar (t() siz) ────────────────────────────────────────────
 const partners = [
-  { name: "Blum",    logo: "/public/ardo-tex.jpg"    },
-  { name: "Egger",   logo: "/public/colibri-art.jpg"   },
-  { name: "Hettich", logo: "/public/higold.jpg" },
+  { name: "Blum",    logo: "/ardo-tex.jpg"    },
+  { name: "Egger",   logo: "/colibri-art.jpg"   },
+  { name: "Hettich", logo: "/higold.jpg" },
 ];
 
 const socialLinks = [
