@@ -166,7 +166,7 @@ const Masterpiece = () => {
             transition-colors duration-200
           "
         >
-          <Link to="/Contact">{t("masterpiece_cta")}</Link>
+          <Link to="/contact">{t("masterpiece_cta")}</Link>
         </motion.button>
       </motion.div>
 

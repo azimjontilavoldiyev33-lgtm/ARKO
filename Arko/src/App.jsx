@@ -25,7 +25,7 @@ function App() {
     };
 
     // Agarda rasm yoki 3D model uzoq yuklansa, timeout qo'yamiz (3 sekund)
-    const timer = setTimeout(() => setIsLoading(false), 5000);
+    const timer = setTimeout(() => setIsLoading(false), 3000);
     return () => clearTimeout(timer);
   }, []);
 
