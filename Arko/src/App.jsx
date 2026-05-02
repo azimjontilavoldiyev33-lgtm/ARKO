@@ -13,6 +13,7 @@ import Contact from './pages/contact/Contact'
 import Catalog from './pages/catalog/Catalog'
 
 import Moodboard from './pages/3D-configurator/Moodboard';
+import NotFound from './components/notfound/NotFound';
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
         <Route path="/catalog"     element={<Catalog/>}      />
         <Route path="/moodboard" element={<Moodboard />} />
         <Route path="/contact"     element={<Contact />}      />
+        <Route path="*"     element={<NotFound />}      />
       </Routes>
 
       <Footer />
