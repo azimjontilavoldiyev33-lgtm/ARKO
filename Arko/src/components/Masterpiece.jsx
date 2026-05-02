@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-
+import { Link } from "react-router-dom";
 
 // Placement bo'yicha tooltip pozitsiyasi
 const tooltipStyle = {
@@ -166,7 +166,7 @@ const Masterpiece = () => {
             transition-colors duration-200
           "
         >
-          <a href="/Contact">{t("masterpiece_cta")}</a>
+          <Link to="/Contact">{t("masterpiece_cta")}</Link>
         </motion.button>
       </motion.div>
 
