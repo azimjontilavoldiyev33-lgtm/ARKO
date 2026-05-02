@@ -42,8 +42,8 @@ const items = [
   },
   {
     id: 7, img: "tumba-shpon.jpg", title: "",
-    pos: { top: "8%", left: "24%" },
-    size: { w: "22%", h: "18%" },
+    pos: { top: "35%", left: "65%" },
+    size: { w: "22%", h: "38%" },
     speedX: 0.3, speedY: 0.45, amp: 14, phase: 2.1,
   },
 ];
